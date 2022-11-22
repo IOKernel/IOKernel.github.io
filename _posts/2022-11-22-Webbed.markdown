@@ -6,7 +6,7 @@ We are given the source-code for a web service that allows the user to register 
 
 input: Username Output: cookie in the form of
 
-```
+```python
 token = {
 	'username' : username, 
 	'admin'	   : True, False
@@ -19,7 +19,7 @@ input: Username Output: Flag if **validate_token** returns True
 
 ## validate_token
 
-```
+```python
 def validate_token(self, enc):
 	try:
 		tok = self.remove_illegal_chars(self.decrypt(enc))
@@ -31,7 +31,7 @@ def validate_token(self, enc):
 
 ## remove_illegal_chars
 
-```
+```python
 ALLOWED = b'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_'
 def remove_illegal_chars(self, token):
 	il = token.index(b': "') + 3
@@ -43,7 +43,7 @@ So we should Register with our user, change the admin parameter in the ciphertex
 
 The encryption method being used to create the tokens is AES in Cipher Block Chaining (CBC) mode. Which is suscepticle to bit flip attacks.
 
-```
+```python
 def encrypt(self, msg):
 	pdm = pad(msg, 16)
 	riv = os.urandom(16)
@@ -60,7 +60,7 @@ An example of plaintext after being padded: `b'{"username": "test_______________
 
 after being split into 16 byte chunks:
 
-```
+```python
 blocks = [
 		  b'{"username": "te', 
 		  b'st______________', 
@@ -80,7 +80,7 @@ The drawback to this is that the block we are changing will get ruined in the ou
 
 Looking at the blocks structure, we should create a username long enough so that we are not messing up data that's crucial in the structure of the json object
 
-```
+```python
 blocks = [
 		  b'{"username": "te', 
 		  b'st______________', 
@@ -96,7 +96,7 @@ First let's create two functions to register and login
 
 ## Register/Login
 
-```
+```python
 def register(username: str):
     session = requests.Session()
     endpoint = f'/register/{username}'
@@ -117,7 +117,7 @@ We receive a token in hex format, which is the encryption of the actual token in
 
 Let's create two helper functions to split ciphertext into blocks of data, and a function to xor blocks together.
 
-```
+```python
 def xor(a: bytes, b: bytes, repeat = True) -> bytes:
     '''
         to get the key to roll over, the module operator
@@ -176,7 +176,7 @@ def bit_flip(previous_block: bytes, input_text: bytes, target: bytes) -> bytes:
 
 Use a username long enough to have more than 1 block of data so it could overwritten with no issue. and correct the next block by adding `",` to fix the json block.
 
-```
+```python
 blocks = [
     b'{"username": "te', 
     b'st______________', 
@@ -205,7 +205,7 @@ After a while we will get a match and the flag prints. `FLAG{1672:67:8f5697b1445
 
 # Full Script
 
-```
+```python
 import requests
 import re
 HOST = "https://blackhat4-81667643f7753de8b518252083265730-0.chals.bh.ctf.sa"
