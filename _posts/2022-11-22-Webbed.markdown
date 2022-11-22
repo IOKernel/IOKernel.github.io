@@ -111,7 +111,7 @@ def login(username: str, token: str):
 
 ![]({{baseurl}}/assets/images/Pasted image 20221121141152.png)
 
-We receive a token in hex format, which is the encryption of the actual token in the structure shown [[#^d6e43b|above]].
+We receive a token in hex format, which is the encryption of the actual token in the structure shown above.
 
 Let's create two helper functions to split ciphertext into blocks of data, and a function to xor blocks together.
 
