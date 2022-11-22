@@ -52,7 +52,7 @@ def encrypt(self, msg):
 	return cip
 ```
 
-The CBC mode of AES Encryption is detailed below. ![[Pasted image 20221121135240.png]]
+The CBC mode of AES Encryption is detailed below. ![AES Encrypto CBC]({{baseurl}}/assets/images/Pasted image 20221121135240.png)
 
 AES operates in block sizes of 16 bytes per block. The message is always padded using PKcs7 padding.
 
