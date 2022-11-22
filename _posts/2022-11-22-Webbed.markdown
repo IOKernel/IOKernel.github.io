@@ -74,7 +74,7 @@ blocks = [
 
 We want to change the block `b' "admin": false}'` into `b'","admin": true}'`
 
-From the diagram for the CBC mode of AES Decryption we can see that each block is decrypted and then XOR'd with the ciphertext of the previous block. And since we can control the ciphertext blocks, we are able to influence the output of `dec(ct_block[i]) XOR ct_block[i-1]`to get the result we want. ![[Pasted image 20221121135935.png]]
+From the diagram for the CBC mode of AES Decryption we can see that each block is decrypted and then XOR'd with the ciphertext of the previous block. And since we can control the ciphertext blocks, we are able to influence the output of `dec(ct_block[i]) XOR ct_block[i-1]`to get the result we want. ![]({{baseurl}}/assets/images/Pasted image 20221121135935.png)
 
 The drawback to this is that the block we are changing will get ruined in the output. If we are changing` ct_block[i-1]` to influence the output of `dec(ct_block[i]) XOR ct_block[i-1]`, Then the output of `dec(ct_blocks[i-1])` will not be the expected result.
 
@@ -111,7 +111,7 @@ def login(username: str, token: str):
     return r
 ```
 
-![[Pasted image 20221121141152.png]]
+![]({{baseurl}}/assets/images/Pasted image 20221121141152.png)
 
 We receive a token in hex format, which is the encryption of the actual token in the structure shown [[#^d6e43b|above]].
 
