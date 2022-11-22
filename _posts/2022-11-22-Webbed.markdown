@@ -70,8 +70,6 @@ blocks = [
 		  ]
 ```
 
-^d6e43b
-
 We want to change the block `b' "admin": false}'` into `b'","admin": true}'`
 
 From the diagram for the CBC mode of AES Decryption we can see that each block is decrypted and then XOR'd with the ciphertext of the previous block. And since we can control the ciphertext blocks, we are able to influence the output of `dec(ct_block[i]) XOR ct_block[i-1]`to get the result we want. ![]({{baseurl}}/assets/images/Pasted image 20221121135935.png)
